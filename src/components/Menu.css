@@ -9,52 +9,109 @@
   .card {
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
     padding: 16px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
   }
   
   .card h3 {
     margin-top: 0;
-    font-size: 1.5em;
   }
   
   .card h4 {
-    margin: 0.5em 0;
-    font-size: 1.2em;
+    margin-bottom: 8px;
   }
   
   .card ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .card li {
-    margin-bottom: 8px;
+    padding-left: 20px;
   }
   
   .day-buttons {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 20px;
   }
   
-  button {
-    padding: 8px 12px;
+  .day-buttons button {
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #007BFF;
-    color: white;
+    background-color: #23408f;
+    color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1 1 calc(33% - 10px);
+    max-width: 150px; 
   }
   
-  button:hover {
-    background-color: #0056b3;
+  .day-buttons button:hover {
+    background-color: #00aeef;
   }
   
-  button:disabled {
+  .day-buttons button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  /* Mobile Optimization for screens smaller than 600px */
+  @media (max-width: 600px) {
+    .day-buttons {
+      justify-content: center; 
+    }
+  
+    .day-buttons button {
+      flex: 1 1 calc(50% - 10px); 
+      max-width: 150px; 
+    }
+  
+    .card-container {
+      justify-content: flex-start; 
+    }
+  
+    .card {
+      max-width: 90%; 
+      padding: 12px; 
+    }
+  
+    h1 {
+      font-size: 1.5em; 
+    }
+  
+    p {
+      font-size: 1em; 
+    }
+  }
+  
+  /* For very small screens (less than 400px), make buttons smaller */
+  @media (max-width: 400px) {
+    .day-buttons {
+      justify-content: center; 
+    }
+}
+  
+    .day-buttons button {
+      flex: 1 1 calc(50% - 10px);
+      max-width: 120px; 
+    }
+  
+    h1 {
+      font-size: 1.2em; 
+  
+    p {
+      font-size: 0.9em; 
+    }
+  }
+  

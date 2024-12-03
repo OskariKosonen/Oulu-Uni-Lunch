@@ -10,8 +10,6 @@ const Menu = () => {
     { customerID: '93077', kitchenID: '70', menuType: '119' },
   ];
 
-
-
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,7 +57,7 @@ const Menu = () => {
 
   return (
     <div>
-      <h1>Oulu University Lunch Menu</h1>
+      <h1>🍔Oulun Lipaston Lounaat🍆</h1>
 
       <div className="day-buttons">
         {weekDates.map((date, index) => (
@@ -73,7 +71,7 @@ const Menu = () => {
         ))}
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>⏳..Ladataan..⏳</p>}
       {error && <p>{error}</p>}
 
       {/* Display menu data in card format */}
