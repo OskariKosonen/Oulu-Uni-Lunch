@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { fetchMenu } from '../api/menuService';
+import { fetchMenuFromJamix } from '../api/menuService';
 import './Menu.css';
 
 const Menu = () => {
@@ -9,6 +9,8 @@ const Menu = () => {
     { customerID: '93077', kitchenID: '70', menuType: '118' },
     { customerID: '93077', kitchenID: '70', menuType: '119' },
   ];
+
+
 
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +26,7 @@ const Menu = () => {
       for (const config of restaurantConfigs) {
         const { customerID, kitchenID, menuType } = config;
         console.log('Fetching menu with:', { customerID, kitchenID, menuType });
-        const data = await fetchMenu(customerID, kitchenID, menuType);
+        const data = await fetchMenuFromJamix(customerID, kitchenID, menuType);
         console.log('Fetched menu data:', data);
         allMenuData.push({ config, data });
       }
