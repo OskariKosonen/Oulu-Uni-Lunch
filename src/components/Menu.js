@@ -14,8 +14,15 @@ const Menu = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(''); // Holds the currently selected date
+  const [cache, setCache] = useState({}); // Cache to store fetched data for each type and date
 
-  const handleFetchMenu = useCallback(async (date) => {
+  const handleFetchMenu = useCallback(async (date, dataType = 'jamix') => {
+    // Check if data already exists in the cache for the given date and data type
+    if (cache[dataType] && cache[dataType][date]) {
+      setMenuData(cache[dataType][date]); // Use cached data
+      return;
+    }
+
     setLoading(true);
     setError(null);
     const allMenuData = [];
@@ -23,24 +30,38 @@ const Menu = () => {
     try {
       for (const config of restaurantConfigs) {
         const { customerID, kitchenID, menuType } = config;
-        console.log('Fetching menu with:', { customerID, kitchenID, menuType });
-        const data = await fetchMenuFromJamix(customerID, kitchenID, menuType);
-        console.log('Fetched menu data:', data);
-        allMenuData.push({ config, data });
+        let data;
+        
+        // Fetch data based on the data type, future implementation for poweresta
+        if (dataType === 'jamix') {
+          data = await fetchMenuFromJamix(customerID, kitchenID, menuType);
+        } else {
+          // data = await fetchMenuFromPoweresta(customerID, kitchenID, date);
+        }
+
+        allMenuData.push({ date, config, data });
       }
+
+      // Update cache with new data for the given date and data type
+      setCache(prevCache => ({
+        ...prevCache,
+        [dataType]: {
+          ...prevCache[dataType],
+          [date]: allMenuData, // Cache data for the given date and type
+        },
+      }));
+
       setMenuData(allMenuData);
     } catch (err) {
-      console.error('Failed to fetch menu:', err);
       setError('Failed to fetch menu. Please check the IDs.');
     } finally {
       setLoading(false);
     }
-  }, [restaurantConfigs]);
+  }, [restaurantConfigs, cache]);
 
   const handleDayClick = (date) => {
-    console.log('Button clicked, setting selected date:', date);
     setSelectedDate(date);
-    handleFetchMenu(date);
+    handleFetchMenu(date); // Default to fetching "jamix" data
   };
 
   // Weekdays calculation
@@ -111,7 +132,12 @@ const Menu = () => {
       )}
 
       {/* Fallback message */}
-      {!loading && menuData.length === 0 && <p>No menu available for the selected day.</p>}
+      {!loading && menuData.length === 0 && <p>Sori bro, Ei tietoja valitulle päivälle</p>}
+
+      <footer>
+        <p>Tiedot eivät ole tarkistettuja, Kolmannen osapuolen palvelu</p>
+      </footer>
+
     </div>
   );
 };
