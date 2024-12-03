@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchMenu = async (customerID, kitchenID) => {
+export const fetchMenu = async (customerID, kitchenID, menuType = '') => {
   const API_URL = `https://fi.jamix.cloud/apps/menuservice/rest/haku/menu/${customerID}/${kitchenID}?lang=fi`;
 
   try {
