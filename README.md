@@ -1,9 +1,6 @@
-# Creating the README content in Markdown format and saving it as a .md file
-
-readme_content = """
 # Oulu University Lunch Menu App 🍔
 
-**Oulu University Lunch Menu App** is a React application that displays the lunch menus for various restaurants at Oulu University. The app fetches menu data from Jamix and Poweresta APIs and presents it in a user-friendly format.
+**Oulu University Lunch Menu App** is a React application that displays the lunch menus for various restaurants at Oulu University. The app fetches menu data from Jamix and Poweresta APIs (Juvenes & Uniresta)and presents it in a user-friendly format.
 
 ---
 
