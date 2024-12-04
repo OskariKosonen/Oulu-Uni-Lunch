@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { fetchMenuFromJamix } from '../api/menuService';
 import './Menu.css';
 
 const Menu = () => {
-  const restaurantConfigs = [
+  const restaurantConfigs = useMemo(() => [
     { customerID: '93077', kitchenID: '49', menuType: '111' },
     { customerID: '93077', kitchenID: '69', menuType: '84' },
     { customerID: '93077', kitchenID: '70', menuType: '118' },
     { customerID: '93077', kitchenID: '70', menuType: '119' },
-  ];
+  ], []);
 
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,6 +58,12 @@ const Menu = () => {
       setLoading(false);
     }
   }, [restaurantConfigs, cache]);
+
+  useEffect(() => {
+    const todayDate = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    setSelectedDate(todayDate);
+    handleFetchMenu(todayDate);
+  }, [handleFetchMenu]);
 
   const handleDayClick = (date) => {
     setSelectedDate(date);
