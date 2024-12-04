@@ -57,12 +57,12 @@ body {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
-  flex: 1 1 calc(20% - 10px); /* Adjusted to ensure buttons are side by side */
+  flex: 1 1 calc(50% - 10px);
   max-width: 200px;
 }
 
 .day-buttons button:hover {
-  background-color: #00aeef;
+  background-color: #0056b3;
 }
 
 .day-buttons button:disabled {
@@ -84,36 +84,29 @@ footer {
   padding: 10px;
   position: relative;
   bottom: 0;
-  color: black; /* Fully opaque text */
-  font-size: 12px; /* Smaller font size */
+  color: black; 
+  font-size: 12px;
 }
 
 /* Mobile Optimization for screens smaller than 600px */
 @media (max-width: 600px) {
   .day-buttons {
     justify-content: center;
-    background-color: #23408f;
   }
 
   .day-buttons button {
-    flex: 1 1 calc(50% - 10px); /* Adjusted to ensure buttons are side by side on smaller screens */
+    flex: 1 1 calc(50% - 10px);
+    max-width: 45%; 
+    background-color: #23408f;
   }
 
   .card-container {
-    justify-content: flex-start;
+    justify-content: center;
     padding: 12px;
   }
 
-  .card {
-    max-width: 90%;
-  }
-
   h1 {
-    font-size: 1.5em; /* Smaller font size for mobile devices */
-  }
-
-  p {
-    font-size: 1em;
+    font-size: 1.5em;
   }
 }
 
@@ -125,7 +118,7 @@ footer {
 
   .day-buttons button {
     flex: 1 1 calc(50% - 10px);
-    max-width: 120px;
+    max-width: 45%; 
   }
 
   h1 {
