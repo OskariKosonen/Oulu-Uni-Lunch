@@ -88,11 +88,11 @@
   
     .card-container {
       justify-content: flex-start; 
+      padding: 12px;
     }
   
     .card {
       max-width: 90%; 
-      padding: 12px; 
     }
   
     h1 {
