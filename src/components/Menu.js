@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { fetchMenuFromJamix } from '../api/menuService';
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import './Menu.css';
 
 const Menu = () => {
@@ -15,6 +16,7 @@ const Menu = () => {
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(''); // Holds the currently selected date
   const [cache, setCache] = useState({}); // Cache to store fetched data for each type and date
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to manage dark mode
 
   const handleFetchMenu = useCallback(async (date, dataType = 'jamix') => {
     // Check if data already exists in the cache for the given date and data type
@@ -64,6 +66,11 @@ const Menu = () => {
     handleFetchMenu(date); // Default to fetching "jamix" data
   };
 
+  const toggleDarkMode = (checked) => {
+    setIsDarkMode(checked);
+    document.body.classList.toggle('dark-mode', checked);
+  };
+
   // Weekdays calculation
   const weekdays = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai'];
   const today = new Date();
@@ -78,6 +85,14 @@ const Menu = () => {
 
   return (
     <div>
+
+      <DarkModeSwitch
+        className="dark-mode-toggle"
+        checked={isDarkMode}
+        onChange={toggleDarkMode}
+        size={20}
+      />
+
       <h1>🍔Oulun Lipaston Lounaat🍆</h1>
 
       <div className="day-buttons">
@@ -132,12 +147,7 @@ const Menu = () => {
       )}
 
       {/* Fallback message */}
-      {!loading && menuData.length === 0 && <p>Sori bro, Ei tietoja valitulle päivälle</p>}
-
-      <footer>
-        <p>Tiedot eivät ole tarkistettuja, Kolmannen osapuolen palvelu</p>
-      </footer>
-
+      {!loading && menuData.length === 0 && <p>Sori bro! Ei tietoja valitulle päivälle.</p>}
     </div>
   );
 };
