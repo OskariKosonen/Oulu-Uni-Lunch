@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { fetchMenuFromJamix } from '../api/menuService';
+import { fetchMenuFromBackend } from '../api/menuService';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import './Menu.css';
 
@@ -34,12 +34,8 @@ const Menu = () => {
         const { customerID, kitchenID, menuType } = config;
         let data;
         
-        // Fetch data based on the data type, future implementation for poweresta
-        if (dataType === 'jamix') {
-          data = await fetchMenuFromJamix(customerID, kitchenID, menuType);
-        } else {
-          // data = await fetchMenuFromPoweresta(customerID, kitchenID, date);
-        }
+        // Fetch data from the backend
+        data = await fetchMenuFromBackend(customerID, kitchenID, menuType, date);
 
         allMenuData.push({ date, config, data });
       }
@@ -85,7 +81,6 @@ const Menu = () => {
 
   return (
     <div>
-
       <DarkModeSwitch
         className="dark-mode-toggle"
         checked={isDarkMode}
@@ -147,7 +142,7 @@ const Menu = () => {
       )}
 
       {/* Fallback message */}
-      {!loading && menuData.length === 0 && <p>Sori bro! Ei tietoja valitulle päivälle.</p>}
+      {!loading && menuData.length === 0 && <p>No menu available for the selected day.</p>}
     </div>
   );
 };
