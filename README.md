@@ -1,6 +1,6 @@
 # Oulu University Lunch Menu App 🍔
 
-**Oulu University Lunch Menu App** is a React application that displays the lunch menus for various restaurants at Oulu University. The app fetches menu data from Jamix and Poweresta APIs (Juvenes & Uniresta)and presents it in a user-friendly format.
+**Oulu University Lunch Menu App** is a React application that displays the lunch menus for various restaurants at Oulu University. The app fetches menu data from Jamix and Poweresta APIs (Juvenes & Uniresta) and presents it in a user-friendly format.
 
 ---
 
@@ -11,6 +11,7 @@
 - **Retry mechanism** for failed API requests.
 - Displays menus in a **card format** with detailed meal options.
 - **Day buttons** to navigate through the week's menu.
+- **Dark mode** toggle for better user experience in low-light environments.
 
 ---
 
@@ -19,6 +20,9 @@
 - **React** – A JavaScript library for building user interfaces.
 - **Axios** – A promise-based HTTP client for the browser and Node.js.
 - **CSS** – Styling the application for a responsive design.
+- **Express** – A web application framework for Node.js.
+- **Mongoose** – An ODM (Object Data Modeling) library for MongoDB and Node.js.
+- **Node-cron** – A task scheduler for Node.js.
 
 ---
 
@@ -33,7 +37,6 @@
 
 - `customerID`: The customer ID.
 - `kitchenID`: The kitchen ID.
-- `menuType`: The menu type (optional).
 
 ---
 
@@ -48,3 +51,4 @@
 - `menu`: The menu identifier.
 - `date`: The date in YYYY-MM-DD format.
 
+---
