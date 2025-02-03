@@ -1,15 +1,16 @@
-// Utility function to get the next weekday dates
-const getWeekdayDates = () => {
-    const today = new Date();
-    const dates = [];
-    for (let i = 1; dates.length < 5; i++) {
-      const nextDate = new Date(today);
-      nextDate.setDate(today.getDate() + i);
-      const day = nextDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-      if (day !== 0 && day !== 6) {
-        dates.push(nextDate.toISOString().split('T')[0]); // Format YYYY-MM-DD
-      }
-    }
-    return dates;
-  };
-  
+function getWeekdayDates() {
+  const dates = [];
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const daysUntilNextMonday = (8 - dayOfWeek) % 7;
+
+  for (let i = 0; i < 5; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + daysUntilNextMonday + i);
+    dates.push(date.toISOString().split('T')[0]);
+  }
+
+  return dates;
+}
+
+module.exports = { getWeekdayDates };
